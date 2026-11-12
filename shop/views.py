@@ -1,3 +1,5 @@
-from django.shortcuts import render  # noqa: F401
+from django.http import HttpResponse
 
-# Create your views here.
+
+def index(request):
+    return HttpResponse("django_start – Django, materiał 10")
