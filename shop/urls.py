@@ -11,4 +11,10 @@ urlpatterns = [
     path("terms/", views.terms, name="terms"),
     path("api/info/", views.info, name="info"),
     path("admin-panel/", views.forbidden, name="forbidden"),
+    path("hello/<str:name>/", views.hello, name="hello"),
+    path("hello/<str:name>/<int:age>/", views.hello_age, name="hello_age"),
+    path("add/<int:a>/<int:b>/", views.add, name="add"),
+    path("subtract/<int:a>/<int:b>/", views.subtract, name="subtract"),
+    path("multiply/<int:a>/<int:b>/", views.multiply, name="multiply"),
+    path("divide/<int:a>/<int:b>/", views.divide, name="divide"),
 ]
