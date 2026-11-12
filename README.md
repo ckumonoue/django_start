@@ -15,6 +15,46 @@ python manage.py runserver
 
 Serwer: http://127.0.0.1:8000
 
+## Struktura
+
+```text
+django_start/
+├── manage.py
+├── config/            # ustawienia projektu
+│   ├── settings.py
+│   └── urls.py        # główna mapa URL (projekt)
+├── shop/              # aplikacja
+│   ├── views.py       # widoki (V z MTV)
+│   └── urls.py        # mapa URL aplikacji
+├── requirements.txt
+└── .gitignore
+```
+
+Są **dwa** pliki `urls.py`. `config/urls.py` mówi, że panel admina żyje pod `/admin/`, a wszystko inne (`""`) przekazuje przez `include("shop.urls")` do aplikacji. `shop/urls.py` mapuje resztę adresu na konkretne widoki i nadaje trasom nazwy w przestrzeni `shop:`. Dzięki temu aplikację `shop` można wpiąć do innego projektu jedną linią.
+
+## Trasy
+
+| Metoda | Adres | Nazwa trasy | Opis |
+|---|---|---|---|
+| GET | `/` | `shop:index` | strona główna |
+| GET | `/about/` | `shop:about` | o nas |
+| GET | `/contact/` | `shop:contact` | kontakt |
+| GET | `/terms/` | `shop:terms` | regulamin |
+| GET | `/api/info/` | `shop:info` | JSON: name, author, version |
+| GET | `/admin-panel/` | `shop:forbidden` | zawsze 403 |
+| GET | `/hello/<name>/` | `shop:hello` | powitanie |
+| GET | `/hello/<name>/<age>/` | `shop:hello_age` | powitanie z wiekiem |
+| GET | `/add/<a>/<b>/` | `shop:add` | dodawanie |
+| GET | `/subtract/<a>/<b>/` | `shop:subtract` | odejmowanie |
+| GET | `/multiply/<a>/<b>/` | `shop:multiply` | mnożenie |
+| GET | `/divide/<a>/<b>/` | `shop:divide` | dzielenie, `b=0` → 400 |
+| GET | `/products/<slug>/` | `shop:product_slug` | produkt po slugu |
+| GET | `/items/?category=&sort=&page=` | `shop:items` | query string, zły `page` → 400 |
+| GET | `/items/<id>/` | `shop:item_detail` | element z mini-bazy, brak → 404 |
+| GET | `/start/` | `shop:start` | redirect (302) na `/` |
+| GET | `/links/` | `shop:links` | adresy zbudowane przez `reverse` |
+| GET | `/admin/` | – | panel admina Django |
+
 ## Obserwacje
 
 ### Zadanie 4 – ukośnik na końcu
