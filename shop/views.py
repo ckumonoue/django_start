@@ -1,4 +1,6 @@
 from django.http import Http404, HttpResponse, JsonResponse
+from django.shortcuts import redirect
+from django.urls import reverse
 
 ITEMS = {
     1: "Laptop",
@@ -77,3 +79,16 @@ def item_detail(request, item_id):
     if item_id not in ITEMS:
         raise Http404("Nie ma takiego przedmiotu")
     return HttpResponse(f"Przedmiot: {ITEMS[item_id]}")
+
+
+def start(request):
+    return redirect("shop:index")
+
+
+def links(request):
+    lines = [
+        reverse("shop:about"),
+        reverse("shop:hello", args=["Ania"]),
+        reverse("shop:item_detail", args=[3]),
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain; charset=utf-8")

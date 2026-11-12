@@ -32,3 +32,7 @@ Zwraca **404**. Konwerter `<int:a>` nie dopasowuje liter, więc żaden wzorzec n
 ### Zadanie 8 – 404 przy `DEBUG=True`
 
 Dla nieistniejącego id (np. `/items/99/`) Django pokazuje stronę „Nie znaleziono strony (404)” z komunikatem z `Http404` („Nie ma takiego przedmiotu”) i informacją, który widok go rzucił (`shop.views.item_detail`). Dla adresu, którego żaden wzorzec nie dopasował, wypisuje natomiast listę wszystkich wypróbowanych tras. Przy `DEBUG=False` byłaby tylko goła strona 404.
+
+### Zadanie 9 – brak `app_name`
+
+Po usunięciu `app_name = "shop"` z `shop/urls.py` wywołanie `reverse("shop:about")` (np. na `/links/`) kończy się błędem `NoReverseMatch: 'shop' is not a registered namespace`. Przestrzeń nazw `shop:` istnieje tylko dzięki `app_name`. Po sprawdzeniu `app_name` został przywrócony.
