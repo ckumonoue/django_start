@@ -28,3 +28,7 @@ Zwraca **404**. Konwerter `<int:a>` nie dopasowuje liter, więc żaden wzorzec n
 ### Zadanie 6 – slug
 
 `/products/laptop-dell-15/` działa (200) – slug to litery, cyfry, `-` i `_`. `/products/laptop dell/` (spacja jest kodowana jako `%20`) daje 404, bo spacja nie należy do znaków dozwolonych w slugu, więc wzorzec nie pasuje.
+
+### Zadanie 8 – 404 przy `DEBUG=True`
+
+Dla nieistniejącego id (np. `/items/99/`) Django pokazuje stronę „Nie znaleziono strony (404)” z komunikatem z `Http404` („Nie ma takiego przedmiotu”) i informacją, który widok go rzucił (`shop.views.item_detail`). Dla adresu, którego żaden wzorzec nie dopasował, wypisuje natomiast listę wszystkich wypróbowanych tras. Przy `DEBUG=False` byłaby tylko goła strona 404.

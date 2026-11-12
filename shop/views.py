@@ -1,4 +1,12 @@
-from django.http import HttpResponse, JsonResponse
+from django.http import Http404, HttpResponse, JsonResponse
+
+ITEMS = {
+    1: "Laptop",
+    2: "Mysz",
+    3: "Klawiatura",
+    4: "Monitor",
+    5: "Słuchawki",
+}
 
 
 def index(request):
@@ -63,3 +71,9 @@ def items(request):
         return HttpResponse("Parametr page musi być liczbą całkowitą", status=400)
     page = int(page_raw)
     return HttpResponse(f"Kategoria: {category}, sortowanie: {sort}, strona: {page}")
+
+
+def item_detail(request, item_id):
+    if item_id not in ITEMS:
+        raise Http404("Nie ma takiego przedmiotu")
+    return HttpResponse(f"Przedmiot: {ITEMS[item_id]}")
