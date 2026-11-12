@@ -53,3 +53,13 @@ def divide(request, a, b):
 
 def product_slug(request, slug):
     return HttpResponse(f"Produkt: {slug}")
+
+
+def items(request):
+    category = request.GET.get("category", "all")
+    sort = request.GET.get("sort", "default")
+    page_raw = request.GET.get("page", "1")
+    if not page_raw.isdigit():
+        return HttpResponse("Parametr page musi być liczbą całkowitą", status=400)
+    page = int(page_raw)
+    return HttpResponse(f"Kategoria: {category}, sortowanie: {sort}, strona: {page}")
