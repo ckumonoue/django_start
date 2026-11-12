@@ -49,3 +49,7 @@ def divide(request, a, b):
     if b == 0:
         return HttpResponse("Nie dzielimy przez zero", status=400)
     return HttpResponse(f"{a} / {b} = {a / b}")
+
+
+def product_slug(request, slug):
+    return HttpResponse(f"Produkt: {slug}")

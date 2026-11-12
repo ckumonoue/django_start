@@ -17,4 +17,5 @@ urlpatterns = [
     path("subtract/<int:a>/<int:b>/", views.subtract, name="subtract"),
     path("multiply/<int:a>/<int:b>/", views.multiply, name="multiply"),
     path("divide/<int:a>/<int:b>/", views.divide, name="divide"),
+    path("products/<slug:slug>/", views.product_slug, name="product_slug"),
 ]
